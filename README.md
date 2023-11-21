@@ -8,8 +8,8 @@
 # in hw2 container
 $ mkdir mytest
 $ cd mytest
-$ git clone https://github.com/ntucn/cn2023-hw2-prejudge.git # ensure it is clean
-$ git clone <your_repository>
+$ git clone https://github.com/ntucn/cn2023-hw2-prejudge.git
+$ git clone <your_repository> # ensure it is clean
 $ cd cn2023-hw2-prejudge
 $ ./install_packages.sh # only need to once; chmod u+x *.sh  if needed
 $ ./run.sh ../<your_repository> # e.g. ../cn2023-hw2-yourgithubid (without "/" in the end)
