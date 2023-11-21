@@ -41,12 +41,15 @@ mkdir .prejudge
 cd .prejudge
 TEST_PATH=`pwd`
 
-killall -9 node
-killall -9 python
+echo -e "${YELLOW}-----startup-----${COLOROFF}"
+killall -9 server > /dev/null 2>&1
+killall -9 node > /dev/null 2>&1
+killall -9 python > /dev/null 2>&1
 
 cd ${REPO_PATH}/hw2
 make clean
 
+echo "done."
 echo -e "${YELLOW}-----structure-check-----${COLOROFF}"
 cd ${TEST_PATH}
 python structure-checker.py ${REPO_PATH}
@@ -56,9 +59,8 @@ echo -e "${YELLOW}-----build-----${COLOROFF}"
 cd ${REPO_PATH}/hw2
 make
 
+echo "done."
 echo -e "${YELLOW}-----server-test-----${COLOROFF}"
-pgrep -fa server > /dev/null 2>&1 &
-
 /bin/cp -f ${TEST_PATH}/assets/secret ${REPO_PATH}/hw2
 cd ${REPO_PATH}/hw2 && ./server 8080 > /dev/null 2>&1 &
 SERVER_8080=$!
@@ -71,10 +73,10 @@ SVR1_RET=$?
 
 rm -f ${REPO_PATH}/hw2/secret
 echo -e "${YELLOW}-----client-test-----${COLOROFF}"
-echo "${TEST_PATH}/assets/pseudo-server"
+# echo "${TEST_PATH}/assets/pseudo-server"
 cd ${TEST_PATH}/assets/pseudo-server
 npm ci > /dev/null 2>&1
-node app.js &
+node app.js > /dev/null 2>&1 &
 echo "Wait for server to wake up..."
 sleep 5
 cd ${TEST_PATH} && python client-0.py 4500 ${REPO_PATH} nodejs
@@ -91,7 +93,10 @@ cd ${TEST_PATH} && python client-0.py 2023 ${REPO_PATH} flask
 CLI2_RET=$?
 
 echo -e "${YELLOW}-----clean-up-----${COLOROFF}"
-pgrep -fa server > /dev/null 2>&1
+killall -9 server > /dev/null 2>&1
+killall -9 node > /dev/null 2>&1
+killall -9 python > /dev/null 2>&1
+echo "done."
 echo -e "${YELLOW}-----summary-----${COLOROFF}"
 
 checkResult "structure-check                          " ${SC_RET}
