@@ -11,7 +11,7 @@ $ cd mytest
 $ git clone https://github.com/ntucn/cn2023-hw2-prejudge.git # ensure it is clean
 $ git clone <your_repository>
 $ cd cn2023-hw2-prejudge
-$ ./install_package.sh # only need to once; chmod u+x *.sh  if needed
+$ ./install_packages.sh # only need to once; chmod u+x *.sh  if needed
 $ ./run.sh ../<your_repository> # e.g. ../cn2023-hw2-yourgithubid (without "/" in the end)
 ```
 
